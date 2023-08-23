@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { PokemonApiService } from 'src/service/pokemon-api.service';
 import { Card } from '../app/models/card.interface'
 
@@ -16,12 +16,23 @@ export class AppComponent implements OnInit {
 
   card: Card | undefined;
 
+  isCarouselVisible: boolean = false;
+  
+  mouseX = 0;
+  mouseY = 0;
+
   constructor(
     private pokemonService: PokemonApiService
   ){}
 
   ngOnInit(){
     this.getRandom()
+  }
+
+  @HostListener('mousemove', ['$event'])
+  onMouseMove(event: MouseEvent) {
+    this.mouseX = event.clientX;
+    this.mouseY = event.clientY;
   }
 
   getPokemonByName(): void{
@@ -41,6 +52,7 @@ export class AppComponent implements OnInit {
           nationalPokedexNumbers: data.data[0].nationalPokedexNumbers,
           images: data.data[0].images.small
         };
+        this.isCarouselVisible = true;
       },
       (error) => {
         console.error('Erro ao obter dados: ', error)

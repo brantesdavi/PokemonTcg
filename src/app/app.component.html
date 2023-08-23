@@ -1,7 +1,9 @@
 <div class="flex items-center justify-center h-screen gap-x-4">
 
  <div class="flex gap-x-10 items-center">
-  <div style="height: 36px; width: 36px;" class="rounded-full bg-primaryRed flex justify-center items-center"><span class="text-white font-bold">&lt;</span></div>
+  <div [ngClass]="isCarouselVisible ? '': 'hidden'">
+    <div style="height: 36px; width: 36px;" [ngClass]="isCarouselVisible ? '': 'hidden'" class="rounded-full bg-primaryRed flex justify-center items-center"><span class="text-white font-bold">&lt;</span></div>
+  </div>
   <div class="bg-white grid gap-y-6" style="width: 245px;">
     <form (ngSubmit)="getPokemonByName()" #pokemonForm="ngForm">
       <div class="flex gap-x-2">
@@ -12,13 +14,13 @@
       </div>
     </form>
     <div *ngIf="card">
-      <img style="height: 342px; " [src]="card.images" class="max-w-full max-h-full rounded-lg tilt-box">
+      <img style="height: 342px; " [src]="card.images" class="max-w-full max-h-full rounded-lg card">
       <span class="text-xs font-semibold">Artista:<span class="font-bold "> {{card.artist}}</span></span>
     </div>
     <img [ngClass]="card ? 'hidden': ''" src="../assets/card_back.png" class="max-w-full max-h-full">
   </div>
-  <div>
-    <div style="height: 36px; width: 36px;" class="rounded-full bg-primaryRed flex justify-center items-center"><span class="text-white font-bold">&gt;</span></div>
+  <div [ngClass]="isCarouselVisible ? '': 'hidden'">
+    <div style="height: 36px; width: 36px;"  class="rounded-full bg-primaryRed flex justify-center items-center"><span class="text-white font-bold">&gt;</span></div>
  </div>
   </div>
 </div>
